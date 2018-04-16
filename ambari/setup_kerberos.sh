@@ -140,6 +140,7 @@ configure_services()
 {
 	echo -e "\n`ts` Checking if running on Sandbox"
 	if [[ -e /root/start-sandbox-hdp.sh ]]
+	then
 		echo -e "\n`ts` Running on Sandbox"
 		sed -ie "/# START BASE SERVICES/aservice ntpd start\nservice krb5kdc start" /root/start-sandbox-hdp.sh
 	fi
