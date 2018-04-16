@@ -136,5 +136,16 @@ configure_kerberos()
 	echo -e "\n`ts` Please check Ambari UI\nThank You! :)"
 }
 
+configure_services()
+{
+	echo -e "\n`ts` Checking if running on Sandbox"
+	if [[ -e /root/start-sandbox-hdp.sh ]]
+		echo -e "\n`ts` Running on Sandbox"
+		sed -ie "/# START BASE SERVICES/aservice ntpd start\nservice krb5kdc start" /root/start-sandbox-hdp.sh
+	fi
+
+}
+
 setup_kdc|tee -a $LOC/Kerb_setup.log
 configure_kerberos|tee -a $LOC/Kerb_setup.log
+configure_services|tee -a $LOC/Kerb_setup.log
